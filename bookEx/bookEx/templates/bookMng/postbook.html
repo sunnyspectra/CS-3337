@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+        Post Book
+        {% endblock title %}
+{% block sidenav %}
+    {% for item in item_list %}
+        <li><a href="{{item.link}}">{{item.item}}</a></li>
+    {% endfor %}
+{% endblock sidenav %}
+
+{% block content %}
+    <h1 align = "center">
+        This is a Post Book Page
+    </h1>
+{% if submitted %}
+<h1 align = "center">Post Book Successfully!</h1>
+{% else %}
+    <form action = "" enctype="multipart/form-data" method = "post" novalidate>
+    <table>{{form.as_table}}
+        <tr>
+            <td>
+                <input type = "submit" value = "Submit">
+            </td>
+        </tr>
+    </table>
+        {% csrf_token %}
+    </form>
+{% endif %}
+
+    <!--<h1>
+        This is CS3337 Project. The main goal of this project is to develop a book exchange system
+    </h1> -->
+{% endblock content %}

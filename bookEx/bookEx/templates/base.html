@@ -1,0 +1,53 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block title %}
+        Title
+        {% endblock title %}
+    </title>
+    <link href = "{% static 'main.css' %}" rel = "stylesheet" type = "text/css">
+</head>
+<body>
+    <header id = "header">
+    <!-- <h1 align = "center">Hello World</h1> -->
+
+        <img src="{% static 'logo.jpeg'%}" height = "60" width = "60" alt="" />
+
+        <span style = "float: right;">
+            {% if user.is_authenticated %}
+                {{ user.username }}
+            <a href = "{% url 'logout' %}?next=/">Logout</a>
+            {% else %}
+                Not Logged In
+            <a href = "{% url 'login' %}?next=/">Login</a>
+            {% endif %}
+        </span>
+
+        <img src="{% static 'booksbanner.jpg'%}" height = "60" width = "800" alt="" />
+    </header>
+
+    <aside id ="leftsidebar">
+        <nav id="nav">
+        <ul>
+            {% block sidenav %}
+                <li>Menu 1</li>
+                <li>Menu 2</li>
+            {% endblock sidenav %}
+        </ul>
+        </nav>
+    </aside>
+
+    <section id = "main">
+        {% block content %}
+            <h1 align="center"> This is our BookExchange System </h1>
+        {% endblock content %}
+    </section>
+    <footer id="footer">
+        2023 Fall Django Project BookEx System
+    </footer>
+</body>
+</html>
